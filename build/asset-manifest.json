@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/aloo/static/css/main.bdda9151.css",
+    "main.js": "/aloo/static/js/main.a50fd8ed.js",
+    "static/js/787.843a7ddb.chunk.js": "/aloo/static/js/787.843a7ddb.chunk.js",
+    "index.html": "/aloo/index.html",
+    "main.bdda9151.css.map": "/aloo/static/css/main.bdda9151.css.map",
+    "main.a50fd8ed.js.map": "/aloo/static/js/main.a50fd8ed.js.map",
+    "787.843a7ddb.chunk.js.map": "/aloo/static/js/787.843a7ddb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bdda9151.css",
+    "static/js/main.a50fd8ed.js"
+  ]
+}
