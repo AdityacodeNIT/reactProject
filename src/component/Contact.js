@@ -1,7 +1,7 @@
 import React from "react";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 
-export default function Contact() {
+const Contact = () => {
   return (
     <div
       className="container-fluid"
@@ -55,4 +55,6 @@ export default function Contact() {
       </div>
     </div>
   );
-}
+};
+
+export default Contact;

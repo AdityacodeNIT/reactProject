@@ -2,202 +2,193 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Dropdown } from "react-bootstrap";
 
-export default function TextForm(props) {
+const TextForm = (props) => {
   const [selectedItem, setSelectedItem] = useState("italic");
-
   const [text, setText] = useState("");
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-
     if (file) {
       const reader = new FileReader();
-
       reader.onload = (e) => {
         setText(e.target.result);
-        props.showAlert("file content loaded");
+        props.showAlert("File content loaded");
       };
       reader.readAsText(file);
     }
   };
 
+  const downloadResults = () => {
+    const data = `
+      Text: ${text}
+      Words: ${words()}
+      Characters: ${trim()}
+      Sentences: ${sentence()}
+    `;
+    const blob = new Blob([data], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "text-results.txt";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    props.showAlert("Results downloaded!", "success");
+  };
+
   const handleUpClick = () => {
-    let newtext = text.toUpperCase();
-    setText(newtext);
-    props.showAlert("Text is converted in Upper case");
+    setText(text.toUpperCase());
+    props.showAlert("Text converted to uppercase");
   };
+
   const handleLowClick = () => {
-    let newtext = text.toLowerCase();
-    setText(newtext);
-    props.showAlert("Text is converted in lower case");
+    setText(text.toLowerCase());
+    props.showAlert("Text converted to lowercase");
   };
+
   const handleClrClick = () => {
-    let newtext = "";
-    setText(newtext);
+    setText("");
     props.showAlert("All clear");
   };
-  const handleonChange = (Event) => {
-    setText(Event.target.value);
+
+  const handleonChange = (event) => {
+    setText(event.target.value);
   };
+
   const handleExtraSpaces = () => {
-    let newText = text.split(/[  ]+/);
-    setText(newText.join(" "));
-    props.showAlert("Extra spaces are clear");
+    setText(text.split(/[ ]+/).join(" "));
+    props.showAlert("Extra spaces cleared");
   };
+
   const capitalizeWord = () => {
-    let mText = text.split(" ").map(capitalize);
-    function capitalize(value) {
-      return value.charAt(0).toUpperCase() + value.slice(1);
-    }
-    setText(mText.join(" "));
-    props.showAlert("First letter of all the word are capitalize");
+    setText(
+      text
+        .split(" ")
+        .map((word) => capitalize(word))
+        .join(" ")
+    );
+    props.showAlert("First letter of all words capitalized");
+  };
+
+  const capitalize = (value) => {
+    return value.charAt(0).toUpperCase() + value.slice(1);
   };
 
   const handleSelect = (eventKey) => {
     setSelectedItem(eventKey);
   };
-  const words = () => {
-    const a = text.split(/\s+/);
-    let size = a.length;
-    let b = 0;
-    for (let i = 0; i < a.length; i++) {
-      if (a[i] === "") {
-        b++;
-      }
-    }
-    return size - b;
-  };
-  const sentence = () => {
-    const a = text.split("");
 
-    let b = 0;
-    for (let i = 0; i < a.length; i++) {
-      if (a[i] === ".") {
-        b++;
-      }
-    }
-    return b;
+  const words = () => {
+    return text.split(/\s+/).filter((word) => word).length;
   };
+
+  const sentence = () => {
+    return text.split(/[.!?]+/).filter((s) => s).length;
+  };
+
   const trim = () => {
-    let newText = text.split(/[  ]+/);
-    let b = newText.join("");
-    return b.length;
+    return text.replace(/\s+/g, "").length;
   };
 
   return (
     <>
       <div
-        className="container"
+        className="container my-3"
         style={{ color: props.backgroundColo === "light" ? "black" : "white" }}
       >
-        <div className="mb-3">
-          <h1>Parmarth Word Counter Enter the text</h1>
-          <textarea
-            id="myBox"
-            className="form-control"
-            onChange={handleonChange}
-            value={text}
-            rows="8"
-            style={{
-              backgroundColor:
-                props.backgroundColo === "dark" ? "#2B3035" : "white",
-              color: props.backgroundColo === "dark" ? "white" : "black",
-              fontStyle:
-                selectedItem === "italic"
-                  ? "italic"
-                  : selectedItem === "oblique"
-                  ? "oblique"
-                  : selectedItem === "inherit"
-                  ? "inherit"
-                  : selectedItem === "unset"
-                  ? "unset"
-                  : "normal",
-              fontWeight:
-                selectedItem === "bold"
-                  ? "bold"
-                  : selectedItem === "bolder"
-                  ? "bolder"
-                  : selectedItem === "lighter"
-                  ? "lighter"
-                  : selectedItem === "inherit"
-                  ? "inherit"
-                  : selectedItem === "unset"
-                  ? "unset"
-                  : "normal",
-            }}
-          ></textarea>
-        </div>
-        <div className="mb-3">
-          <input
-            type="file"
-            accept=".txt"
-            className="form-control"
-            onChange={handleFileChange}
-          ></input>
-        </div>
-        <div className="btn-group btn-group-xs">
+        <h1>Parmarth Word Counter</h1>
+        <textarea
+          id="myBox"
+          className="form-control mb-3"
+          onChange={handleonChange}
+          value={text}
+          rows="8"
+          style={{
+            backgroundColor:
+              props.backgroundColo === "dark" ? "#2B3035" : "white",
+            color: props.backgroundColo === "dark" ? "white" : "black",
+            fontStyle: selectedItem === "italic" ? "italic" : "normal",
+            fontWeight: selectedItem === "bold" ? "bold" : "normal",
+          }}
+        ></textarea>
+
+        <input
+          type="file"
+          accept=".txt"
+          className="form-control mb-3"
+          onChange={handleFileChange}
+        />
+
+        <div className="btn-group mb-3" style={{ flexWrap: "wrap" }}>
           <button
-            className="btn btn-primary btn-sm"
+            className="btn btn-primary me-2"
             disabled={text.length === 0}
             onClick={handleUpClick}
           >
             Convert to Uppercase
           </button>
           <button
-            className="btn btn-primary btn-sm mx-3"
+            className="btn btn-primary me-2"
             disabled={text.length === 0}
             onClick={handleLowClick}
           >
             Convert to Lowercase
           </button>
           <button
-            className="btn btn-primary  btn-sm x-3"
+            className="btn btn-primary me-2"
             disabled={text.length === 0}
             onClick={handleClrClick}
           >
             Clear
           </button>
           <button
-            className="btn btn-primary btn-sm  mx-3"
+            className="btn btn-primary me-2"
             disabled={text.length === 0}
             onClick={handleExtraSpaces}
           >
-            Clear extra spaces
+            Clear Extra Spaces
           </button>
           <button
-            className="btn btn-primary btn-sm mx-3"
+            className="btn btn-primary me-2"
             disabled={text.length === 0}
             onClick={capitalizeWord}
           >
-            capitalize
+            Capitalize
           </button>
 
           <Dropdown onSelect={handleSelect}>
-            <Dropdown.Toggle variant="primary">{selectedItem}</Dropdown.Toggle>
-
+            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+              {selectedItem}
+            </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item eventKey="italic">italic</Dropdown.Item>
-              <Dropdown.Item eventKey="bold">bold</Dropdown.Item>
-              <Dropdown.Item eventKey="obligue">obligue</Dropdown.Item>
-              <Dropdown.Item eventKey="inherit">inherit</Dropdown.Item>
-              <Dropdown.Item eventKey="unset">unset</Dropdown.Item>
+              <Dropdown.Item eventKey="italic">Italic</Dropdown.Item>
+              <Dropdown.Item eventKey="bold">Bold</Dropdown.Item>
+              <Dropdown.Item eventKey="oblique">Oblique</Dropdown.Item>
+              <Dropdown.Item eventKey="inherit">Inherit</Dropdown.Item>
+              <Dropdown.Item eventKey="unset">Unset</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
+
+          <button className="btn btn-secondary ms-2" onClick={downloadResults}>
+            Download Results
+          </button>
         </div>
       </div>
+
       <div
         className="container my-3"
         style={{ color: props.backgroundColo === "light" ? "black" : "white" }}
       >
-        <h1>Your text summary</h1>
+        <h1>Your Text Summary</h1>
         <h3>
-          {words()} word and {trim()} characters
+          {words()} words and {trim()} characters
         </h3>
-        <h3>{sentence()} Senteces</h3>
-        <h3>{0.003 * words()} Minutes to read </h3>
+        <h3>{sentence()} sentences</h3>
+        <h3>{(0.003 * words()).toFixed(2)} minutes to read</h3>
         <h2>Preview</h2>
         <h4>{text.length > 0 ? text : "Nothing to preview"}</h4>
       </div>
     </>
   );
-}
+};
+
+export default TextForm;
