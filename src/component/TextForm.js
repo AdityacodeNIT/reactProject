@@ -118,37 +118,37 @@ const TextForm = (props) => {
           onChange={handleFileChange}
         />
 
-        <div className="btn-group mb-3" style={{ flexWrap: "wrap" }}>
+        <div className="d-flex flex-wrap gap-2 mb-3">
           <button
-            className="btn btn-primary me-2"
+            className="btn btn-primary"
             disabled={text.length === 0}
             onClick={handleUpClick}
           >
-            Convert to Uppercase
+            Uppercase
           </button>
           <button
-            className="btn btn-primary me-2"
+            className="btn btn-primary"
             disabled={text.length === 0}
             onClick={handleLowClick}
           >
-            Convert to Lowercase
+            Lowercase
           </button>
           <button
-            className="btn btn-primary me-2"
+            className="btn btn-primary"
             disabled={text.length === 0}
             onClick={handleClrClick}
           >
             Clear
           </button>
           <button
-            className="btn btn-primary me-2"
+            className="btn btn-primary"
             disabled={text.length === 0}
             onClick={handleExtraSpaces}
           >
             Clear Extra Spaces
           </button>
           <button
-            className="btn btn-primary me-2"
+            className="btn btn-primary"
             disabled={text.length === 0}
             onClick={capitalizeWord}
           >
@@ -168,7 +168,7 @@ const TextForm = (props) => {
             </Dropdown.Menu>
           </Dropdown>
 
-          <button className="btn btn-secondary ms-2" onClick={downloadResults}>
+          <button className="btn btn-secondary" onClick={downloadResults}>
             Download Results
           </button>
         </div>
