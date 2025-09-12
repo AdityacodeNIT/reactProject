@@ -153,7 +153,7 @@ const About = (props) => {
           </div>
         </div>
 
-        {/* New Sections for File Add and File Save */}
+        {/* AI-Powered Features */}
         <div className="accordion-item">
           <h2 className="accordion-header">
             <button
@@ -165,7 +165,7 @@ const About = (props) => {
               aria-controls="collapseSix"
               style={myStyle}
             >
-              <h2>File Add:</h2>
+              <h2>🤖 AI-Powered Analysis:</h2>
             </button>
           </h2>
           <div
@@ -175,12 +175,17 @@ const About = (props) => {
             style={myStyle}
           >
             <div className="accordion-body" style={myStyle}>
-              Easily add text files to the application for processing. Simply
-              click on the "Add File" button and choose a text file to load your
-              content into the text area.
+              <strong>Sentiment Analysis:</strong> Automatically detect the emotional tone of your text (positive, negative, neutral).
+              <br />
+              <strong>Language Detection:</strong> Identify the language of your text with confidence scores.
+              <br />
+              <strong>Grammar & Spell Check:</strong> Get real-time suggestions for grammar and style improvements.
+              <br />
+              <strong>Readability Score:</strong> Calculate Flesch Reading Ease score and grade level assessment.
             </div>
           </div>
         </div>
+
         <div className="accordion-item">
           <h2 className="accordion-header">
             <button
@@ -192,7 +197,7 @@ const About = (props) => {
               aria-controls="collapseSeven"
               style={myStyle}
             >
-              <h2>File Save:</h2>
+              <h2>✨ Smart Text Tools:</h2>
             </button>
           </h2>
           <div
@@ -202,9 +207,109 @@ const About = (props) => {
             style={myStyle}
           >
             <div className="accordion-body" style={myStyle}>
-              Save your text and results to a file with a single click. Use the
-              "Download Results" button to create a text file that you can keep
-              for later reference.
+              <strong>Text Summarization:</strong> Generate concise summaries of long text automatically.
+              <br />
+              <strong>Paraphrasing:</strong> Rewrite text while maintaining the original meaning.
+              <br />
+              <strong>Tone Adjustment:</strong> Convert text to formal, casual, professional, or friendly tone.
+              <br />
+              <strong>Translation:</strong> Translate text to multiple languages instantly.
+            </div>
+          </div>
+        </div>
+
+        <div className="accordion-item">
+          <h2 className="accordion-header">
+            <button
+              className="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseEight"
+              aria-expanded="false"
+              aria-controls="collapseEight"
+              style={myStyle}
+            >
+              <h2>🚀 Advanced Features:</h2>
+            </button>
+          </h2>
+          <div
+            id="collapseEight"
+            className="accordion-collapse collapse"
+            data-bs-parent="#accordionExample"
+            style={myStyle}
+          >
+            <div className="accordion-body" style={myStyle}>
+              <strong>OCR (Image to Text):</strong> Extract text from images using AI-powered optical character recognition.
+              <br />
+              <strong>Text-to-Speech:</strong> Convert your text to speech with customizable voice settings.
+              <br />
+              <strong>Batch Processing:</strong> Process multiple text files simultaneously with comprehensive analysis.
+              <br />
+              <strong>Keyword Extraction:</strong> Automatically identify important keywords and generate hashtags.
+            </div>
+          </div>
+        </div>
+
+        <div className="accordion-item">
+          <h2 className="accordion-header">
+            <button
+              className="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseNine"
+              aria-expanded="false"
+              aria-controls="collapseNine"
+              style={myStyle}
+            >
+              <h2>📊 Analytics Dashboard:</h2>
+            </button>
+          </h2>
+          <div
+            id="collapseNine"
+            className="accordion-collapse collapse"
+            data-bs-parent="#accordionExample"
+            style={myStyle}
+          >
+            <div className="accordion-body" style={myStyle}>
+              <strong>Writing Quality Metrics:</strong> Analyze sentence variety, complexity score, and writing patterns.
+              <br />
+              <strong>Advanced Statistics:</strong> Get detailed insights including average words per sentence, character analysis, and reading time.
+              <br />
+              <strong>Visual Analytics:</strong> Interactive charts and progress bars for better data visualization.
+              <br />
+              <strong>Export Results:</strong> Download comprehensive analysis reports in CSV format.
+            </div>
+          </div>
+        </div>
+
+        <div className="accordion-item">
+          <h2 className="accordion-header">
+            <button
+              className="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTen"
+              aria-expanded="false"
+              aria-controls="collapseTen"
+              style={myStyle}
+            >
+              <h2>💡 Creative Tools:</h2>
+            </button>
+          </h2>
+          <div
+            id="collapseTen"
+            className="accordion-collapse collapse"
+            data-bs-parent="#accordionExample"
+            style={myStyle}
+          >
+            <div className="accordion-body" style={myStyle}>
+              <strong>Writing Prompt Generator:</strong> Get AI-generated creative writing prompts based on your text keywords.
+              <br />
+              <strong>Hashtag Generator:</strong> Automatically create relevant hashtags for social media content.
+              <br />
+              <strong>File Management:</strong> Upload, process, and download text files with ease.
+              <br />
+              <strong>Real-time Processing:</strong> All AI features work instantly as you type or upload content.
             </div>
           </div>
         </div>

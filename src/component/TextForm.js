@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Tab, Tabs } from "react-bootstrap";
+import AIFeatures from "./AIFeatures";
+import AnalyticsDashboard from "./AnalyticsDashboard";
 
 const TextForm = (props) => {
   const [selectedItem, setSelectedItem] = useState("italic");
@@ -95,97 +97,159 @@ const TextForm = (props) => {
         className="container my-3"
         style={{ color: props.backgroundColo === "light" ? "black" : "white" }}
       >
-        <h1>Parmarth Word Counter</h1>
-        <textarea
-          id="myBox"
-          className="form-control mb-3"
-          onChange={handleonChange}
-          value={text}
-          rows="8"
-          style={{
-            backgroundColor:
-              props.backgroundColo === "dark" ? "#2B3035" : "white",
-            color: props.backgroundColo === "dark" ? "white" : "black",
-            fontStyle: selectedItem === "italic" ? "italic" : "normal",
-            fontWeight: selectedItem === "bold" ? "bold" : "normal",
-          }}
-        ></textarea>
+        <h1>🤖 Parmarth AI Text Analyzer</h1>
+        
+        <Tabs defaultActiveKey="editor" id="main-tabs" className="mb-3">
+          <Tab eventKey="editor" title="📝 Text Editor">
+            <textarea
+              id="myBox"
+              className="form-control mb-3"
+              onChange={handleonChange}
+              value={text}
+              rows="8"
+              placeholder="Enter your text here to analyze with AI..."
+              style={{
+                backgroundColor:
+                  props.backgroundColo === "dark" ? "#2B3035" : "white",
+                color: props.backgroundColo === "dark" ? "white" : "black",
+                fontStyle: selectedItem === "italic" ? "italic" : "normal",
+                fontWeight: selectedItem === "bold" ? "bold" : "normal",
+              }}
+            ></textarea>
 
-        <input
-          type="file"
-          accept=".txt"
-          className="form-control mb-3"
-          onChange={handleFileChange}
-        />
+            <input
+              type="file"
+              accept=".txt"
+              className="form-control mb-3"
+              onChange={handleFileChange}
+            />
 
-        <div className="d-flex flex-wrap gap-2 mb-3">
-          <button
-            className="btn btn-primary"
-            disabled={text.length === 0}
-            onClick={handleUpClick}
-          >
-            Uppercase
-          </button>
-          <button
-            className="btn btn-primary"
-            disabled={text.length === 0}
-            onClick={handleLowClick}
-          >
-            Lowercase
-          </button>
-          <button
-            className="btn btn-primary"
-            disabled={text.length === 0}
-            onClick={handleClrClick}
-          >
-            Clear
-          </button>
-          <button
-            className="btn btn-primary"
-            disabled={text.length === 0}
-            onClick={handleExtraSpaces}
-          >
-            Clear Extra Spaces
-          </button>
-          <button
-            className="btn btn-primary"
-            disabled={text.length === 0}
-            onClick={capitalizeWord}
-          >
-            Capitalize
-          </button>
+            <div className="d-flex flex-wrap gap-2 mb-3">
+              <button
+                className="btn btn-primary"
+                disabled={text.length === 0}
+                onClick={handleUpClick}
+              >
+                Uppercase
+              </button>
+              <button
+                className="btn btn-primary"
+                disabled={text.length === 0}
+                onClick={handleLowClick}
+              >
+                Lowercase
+              </button>
+              <button
+                className="btn btn-primary"
+                disabled={text.length === 0}
+                onClick={handleClrClick}
+              >
+                Clear
+              </button>
+              <button
+                className="btn btn-primary"
+                disabled={text.length === 0}
+                onClick={handleExtraSpaces}
+              >
+                Clear Extra Spaces
+              </button>
+              <button
+                className="btn btn-primary"
+                disabled={text.length === 0}
+                onClick={capitalizeWord}
+              >
+                Capitalize
+              </button>
 
-          <Dropdown onSelect={handleSelect}>
-            <Dropdown.Toggle variant="primary" id="dropdown-basic">
-              {selectedItem}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item eventKey="italic">Italic</Dropdown.Item>
-              <Dropdown.Item eventKey="bold">Bold</Dropdown.Item>
-              <Dropdown.Item eventKey="oblique">Oblique</Dropdown.Item>
-              <Dropdown.Item eventKey="inherit">Inherit</Dropdown.Item>
-              <Dropdown.Item eventKey="unset">Unset</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+              <Dropdown onSelect={handleSelect}>
+                <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                  {selectedItem}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item eventKey="italic">Italic</Dropdown.Item>
+                  <Dropdown.Item eventKey="bold">Bold</Dropdown.Item>
+                  <Dropdown.Item eventKey="oblique">Oblique</Dropdown.Item>
+                  <Dropdown.Item eventKey="inherit">Inherit</Dropdown.Item>
+                  <Dropdown.Item eventKey="unset">Unset</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
 
-          <button className="btn btn-secondary" onClick={downloadResults}>
-            Download Results
-          </button>
-        </div>
-      </div>
+              <button className="btn btn-secondary" onClick={downloadResults}>
+                Download Results
+              </button>
+            </div>
 
-      <div
-        className="container my-3"
-        style={{ color: props.backgroundColo === "light" ? "black" : "white" }}
-      >
-        <h1>Your Text Summary</h1>
-        <h3>
-          {words()} words and {trim()} characters
-        </h3>
-        <h3>{sentence()} sentences</h3>
-        <h3>{(0.003 * words()).toFixed(2)} minutes to read</h3>
-        <h2>Preview</h2>
-        <h4>{text.length > 0 ? text : "Nothing to preview"}</h4>
+            <div
+              className="my-3"
+              style={{ color: props.backgroundColo === "light" ? "black" : "white" }}
+            >
+              <h3>📊 Basic Statistics</h3>
+              <div className="row">
+                <div className="col-md-3">
+                  <div className="card text-center">
+                    <div className="card-body">
+                      <h5 className="card-title">{words()}</h5>
+                      <p className="card-text">Words</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="card text-center">
+                    <div className="card-body">
+                      <h5 className="card-title">{trim()}</h5>
+                      <p className="card-text">Characters</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="card text-center">
+                    <div className="card-body">
+                      <h5 className="card-title">{sentence()}</h5>
+                      <p className="card-text">Sentences</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="card text-center">
+                    <div className="card-body">
+                      <h5 className="card-title">{(0.003 * words()).toFixed(1)}</h5>
+                      <p className="card-text">Min to Read</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="my-3">
+              <h3>👀 Preview</h3>
+              <div 
+                className="p-3 border rounded"
+                style={{
+                  backgroundColor: props.backgroundColo === "dark" ? "#2B3035" : "#f8f9fa",
+                  minHeight: "100px"
+                }}
+              >
+                {text.length > 0 ? text : "Nothing to preview"}
+              </div>
+            </div>
+          </Tab>
+
+          <Tab eventKey="ai-analysis" title="🤖 AI Analysis">
+            <AIFeatures 
+              text={text} 
+              backgroundColo={props.backgroundColo}
+              showAlert={props.showAlert}
+              onTextUpdate={setText}
+            />
+          </Tab>
+
+          <Tab eventKey="analytics" title="📊 Analytics">
+            <AnalyticsDashboard 
+              text={text}
+              backgroundColo={props.backgroundColo}
+            />
+          </Tab>
+        </Tabs>
       </div>
     </>
   );
