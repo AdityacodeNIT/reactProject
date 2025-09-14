@@ -313,6 +313,42 @@ const About = (props) => {
             </div>
           </div>
         </div>
+
+        <div className="accordion-item">
+          <h2 className="accordion-header">
+            <button
+              className="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseEleven"
+              aria-expanded="false"
+              aria-controls="collapseEleven"
+              style={myStyle}
+            >
+              <h2>📁 Document Management System:</h2>
+            </button>
+          </h2>
+          <div
+            id="collapseEleven"
+            className="accordion-collapse collapse"
+            data-bs-parent="#accordionExample"
+            style={myStyle}
+          >
+            <div className="accordion-body" style={myStyle}>
+              <strong>Multi-File Upload:</strong> Upload and manage multiple documents simultaneously with progress tracking.
+              <br />
+              <strong>AI-Powered Analysis:</strong> Automatic sentiment analysis, summarization, keyword extraction, and readability scoring.
+              <br />
+              <strong>Bulk Operations:</strong> Process multiple documents at once with batch analysis and bulk actions.
+              <br />
+              <strong>Advanced Search & Filter:</strong> Find documents quickly with powerful search and filtering capabilities.
+              <br />
+              <strong>Export & Reporting:</strong> Export document data as JSON, CSV, or comprehensive summary reports.
+              <br />
+              <strong>Document Insights:</strong> Detailed analytics including word counts, file sizes, and AI-generated insights.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
